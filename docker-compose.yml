@@ -1,0 +1,18 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ''
+      MONGO_INITDB_ROOT_PASSWORD: ''
+
+  orderbook:
+    container_name: orderbook
+    build:
+      context: ./
+    ports:
+      - '80:5000'
+    env_file:
+      - .env.development
+    depends_on:
+      - mongo
